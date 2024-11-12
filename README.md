@@ -21,15 +21,14 @@ git clone https://github.com/HelloWorld-Ninja/sql-injection-demo
 cd seu-repositorio
 ```
 
-```bash
 2. Instale as Dependências
 Instale as dependências do projeto usando NPM ou Yarn:
 
+```bash
 npm install
 # ou
 yarn install
 ```
-
 
 3. Configuração do Banco de Dados MySQL
 Abra o MySQL e crie um banco de dados para este projeto:
