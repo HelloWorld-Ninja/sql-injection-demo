@@ -31,7 +31,7 @@ yarn install
 3. Configuração do Banco de Dados MySQL
 Abra o MySQL e crie um banco de dados para este projeto:
 
-```bash
+```sql
 CREATE DATABASE projeto_demo_sql_injection;
 Selecione o banco de dados que você acabou de criar:
 
@@ -47,7 +47,7 @@ CREATE TABLE users (
 
 Insira um usuário de teste na tabela users:
 
-```bash
+```sql
 INSERT INTO users (username, password) VALUES ('admin', 'password123');
 ```
 Nota: Em um projeto real, nunca armazene senhas em texto simples. Use hashing seguro (ex.: bcrypt) para proteger as senhas.
@@ -58,7 +58,7 @@ No diretório raiz do projeto, crie um arquivo .env.local para armazenar suas va
 touch .env.local
 Adicione as seguintes variáveis ao arquivo .env.local, substituindo as informações com as suas configurações do MySQL:
 
-```bash
+```env
 MYSQL_HOST=localhost
 MYSQL_USER=seu_usuario
 MYSQL_PASSWORD=sua_senha
@@ -81,7 +81,7 @@ Tela de Login: Acesse http://localhost:3000/login para visualizar a tela de logi
 
 Demonstração de SQL Injection: Tente o seguinte payload para explorar a vulnerabilidade:
 
-```bash
+```sql
 Username: admin' OR '1'='1
 Password: qualquer texto
 ```
