@@ -17,7 +17,7 @@ Este projeto é um exemplo educacional para demonstrar vulnerabilidades de **SQL
 Primeiro, clone o repositório para o seu ambiente local:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/HelloWorld-Ninja/sql-injection-demo
 cd seu-repositorio
 2. Instale as Dependências
 Instale as dependências do projeto usando NPM ou Yarn:
