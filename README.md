@@ -18,7 +18,7 @@ Primeiro, clone o repositório para o seu ambiente local:
 
 ```bash
 git clone https://github.com/HelloWorld-Ninja/sql-injection-demo
-cd seu-repositorio
+cd sql-injection-demo
 ```
 
 ### 2. Instale as Dependências
