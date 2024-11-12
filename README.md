@@ -21,7 +21,7 @@ git clone https://github.com/HelloWorld-Ninja/sql-injection-demo
 cd seu-repositorio
 ```
 
-2. Instale as Dependências
+### 2. Instale as Dependências
 Instale as dependências do projeto usando NPM ou Yarn:
 
 ```bash
@@ -30,7 +30,7 @@ npm install
 yarn install
 ```
 
-3. Configuração do Banco de Dados MySQL
+### 3. Configuração do Banco de Dados MySQL
 Abra o MySQL e crie um banco de dados para este projeto:
 
 ```sql
@@ -54,7 +54,7 @@ INSERT INTO users (username, password) VALUES ('admin', 'password123');
 ```
 Nota: Em um projeto real, nunca armazene senhas em texto simples. Use hashing seguro (ex.: bcrypt) para proteger as senhas.
 
-4. Configuração do Arquivo .env.local
+### 4. Configuração do Arquivo .env.local
 No diretório raiz do projeto, crie um arquivo .env.local para armazenar suas variáveis de ambiente:
 
 touch .env.local
@@ -67,7 +67,7 @@ MYSQL_PASSWORD=sua_senha
 MYSQL_DATABASE=projeto_demo_sql_injection
 ```
 
-5. Inicialize o Servidor de Desenvolvimento
+### 5. Inicialize o Servidor de Desenvolvimento
 Agora, inicie o servidor Next.js em modo de desenvolvimento:
 
 ```bash
@@ -78,7 +78,7 @@ yarn dev
 
 O projeto estará disponível em http://localhost:3000.
 
-6. Testando a Vulnerabilidade de SQL Injection
+### 6. Testando a Vulnerabilidade de SQL Injection
 Tela de Login: Acesse http://localhost:3000/login para visualizar a tela de login.
 
 Demonstração de SQL Injection: Tente o seguinte payload para explorar a vulnerabilidade:
@@ -109,13 +109,13 @@ my-next-app
 └── README.md                     # Instruções do projeto
 ```
 
-Notas Importantes
+### Notas Importantes
 
 - Segurança: Este projeto é vulnerável por design para fins de demonstração. Em um ambiente de produção, sempre use consultas parametrizadas para evitar SQL Injection.
 - Hashing de Senha: Em um projeto real, use um mecanismo de hashing como bcrypt para armazenar senhas de forma segura.
 - Configurações do Banco de Dados: Certifique-se de que o MySQL está configurado corretamente e que as informações de conexão no .env.local estão corretas.
 
-Próximos Passos
+### Próximos Passos
 
 - Implementar Proteções: Explore a correção da vulnerabilidade usando prepared statements para proteger contra SQL Injection.
 - Hashing Seguro de Senha: Use hashing para proteger senhas no banco de dados.
