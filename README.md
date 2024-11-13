@@ -35,24 +35,24 @@ Abra o MySQL e crie um banco de dados para este projeto:
 
 ```sql
 CREATE DATABASE projeto_demo_sql_injection;
+```
 Selecione o banco de dados que você acabou de criar:
-
+```sql
 USE projeto_demo_sql_injection;
+```
 Crie a tabela users:
-
+```sql
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
 ```
-
 Insira um usuário de teste na tabela users:
-
 ```sql
 INSERT INTO users (username, password) VALUES ('admin', 'password123');
 ```
-Nota: Em um projeto real, nunca armazene senhas em texto simples. Use hashing seguro (ex.: bcrypt) para proteger as senhas.
+> Nota: Em um projeto real, nunca armazene senhas em texto simples. Use hashing seguro (ex.: bcrypt) para proteger as senhas.
 
 ### 4. Configuração do Arquivo .env.local
 No diretório raiz do projeto, crie um arquivo .env.local para armazenar suas variáveis de ambiente:
@@ -121,7 +121,3 @@ my-next-app
 - Hashing Seguro de Senha: Use hashing para proteger senhas no banco de dados.
 - Validação de Sessão: Implemente um sistema de sessão seguro para proteger o acesso ao dashboard.
 - Este projeto foi criado para demonstrar como SQL Injection pode comprometer a segurança de uma aplicação e deve ser usado apenas em ambientes controlados e para aprendizado.
-
----
-
-Esse `README.md` explica detalhadamente o projeto, incluindo requisitos, instalação, config
