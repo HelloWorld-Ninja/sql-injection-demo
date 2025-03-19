@@ -1,21 +1,26 @@
+"use client";
+
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function Dashboard() {
   const router = useRouter();
+  const pathname = usePathname(); // Garantia que estamos no ambiente correto
   const [loading, setLoading] = useState(true);
   const flag = "FLAG{SQL_MASTER_42}";
 
   useEffect(() => {
-    // Aqui é onde você verificaria o token de autenticação do usuário
-    const isAuthenticated = true; // Simulação, troque pela verificação real
+    if (pathname !== "/dashboard") return; // Evita erro de montagem
+
+    // Simulação de autenticação (troque pela verificação real)
+    const isAuthenticated = true;
 
     if (!isAuthenticated) {
       router.push('/login');
     } else {
       setLoading(false);
     }
-  }, [router]);
+  }, [pathname, router]);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(flag);
@@ -35,7 +40,7 @@ export default function Dashboard() {
           Você entrou na <span className="matrix">Matrix</span>. Apenas usuários autorizados podem acessar esta área.
         </p>
 
-        {/* Flag visível */}
+        {/* Flag visível com botão de cópia */}
         <div className="flag-container">
           <p className="flag-text">{flag}</p>
           <button className="copy-button" onClick={copyToClipboard}>
