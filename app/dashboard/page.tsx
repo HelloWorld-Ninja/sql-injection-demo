@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 export default function Dashboard() {
   const router = useRouter();
-  const pathname = usePathname(); // Garantia que estamos no ambiente correto
+  const pathname = usePathname();
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
   const flag = "FLAG{SQL_MASTER_42}";
+  const flagRef = useRef(null);
 
   useEffect(() => {
-    if (pathname !== "/dashboard") return; // Evita erro de montagem
+    if (pathname !== "/dashboard") return;
 
-    // Simulação de autenticação (troque pela verificação real)
     const isAuthenticated = true;
 
     if (!isAuthenticated) {
@@ -22,9 +23,27 @@ export default function Dashboard() {
     }
   }, [pathname, router]);
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(flag);
-    alert("Flag copiada para a área de transferência!");
+  const copyToClipboard = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(flag);
+      } else {
+        // Fallback para navegadores antigos
+        const textArea = document.createElement("textarea");
+        textArea.value = flag;
+        textArea.style.position = "absolute";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
+
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Falha ao copiar:", err);
+    }
   };
 
   if (loading) {
@@ -42,9 +61,9 @@ export default function Dashboard() {
 
         {/* Flag visível com botão de cópia */}
         <div className="flag-container">
-          <p className="flag-text">{flag}</p>
+          <p className="flag-text" ref={flagRef}>{flag}</p>
           <button className="copy-button" onClick={copyToClipboard}>
-            Copiar Flag
+            {copied ? "Copiado!" : "Copiar Flag"}
           </button>
         </div>
 
@@ -79,26 +98,6 @@ export default function Dashboard() {
           z-index: 1;
         }
 
-        .matrix-overlay::before {
-          content: '';
-          display: block;
-          width: 100%;
-          height: 100%;
-          background: url('https://i.imgur.com/mDoZ2iK.png') repeat;
-          opacity: 0.2;
-          animation: matrixRain 10s infinite linear;
-          position: absolute;
-        }
-
-        @keyframes matrixRain {
-          0% {
-            transform: translateY(-100%);
-          }
-          100% {
-            transform: translateY(100%);
-          }
-        }
-
         .content {
           position: relative;
           z-index: 2;
@@ -108,20 +107,8 @@ export default function Dashboard() {
         .dashboard-title {
           font-size: 2.5rem;
           color: #00ff00;
-          text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+          text-shadow: 0 0 10px #00ff00;
           margin-bottom: 1rem;
-        }
-
-        .dashboard-text {
-          font-size: 1.2rem;
-          color: #00ff00;
-          text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
-          margin-bottom: 2rem;
-        }
-
-        .matrix {
-          color: #0aff0a;
-          font-weight: bold;
         }
 
         .flag-container {
@@ -154,7 +141,6 @@ export default function Dashboard() {
         .copy-button:hover {
           background: #00ff00;
           color: #000;
-          text-shadow: none;
         }
 
         .dashboard-button {
@@ -172,7 +158,6 @@ export default function Dashboard() {
         .dashboard-button:hover {
           background: #00ff00;
           color: #000;
-          text-shadow: none;
         }
       `}</style>
     </div>
