@@ -1,14 +1,13 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
-export default function DashboardPage() {
+export default function Dashboard() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const flag = "FLAG{SQL_MASTER_42}";
 
   useEffect(() => {
-    // Em um app real, aqui é onde você verificaria o token de autenticação do usuário
+    // Aqui é onde você verificaria o token de autenticação do usuário
     const isAuthenticated = true; // Simulação, troque pela verificação real
 
     if (!isAuthenticated) {
@@ -17,6 +16,11 @@ export default function DashboardPage() {
       setLoading(false);
     }
   }, [router]);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(flag);
+    alert("Flag copiada para a área de transferência!");
+  };
 
   if (loading) {
     return <p>Carregando...</p>;
@@ -30,6 +34,15 @@ export default function DashboardPage() {
         <p className="dashboard-text">
           Você entrou na <span className="matrix">Matrix</span>. Apenas usuários autorizados podem acessar esta área.
         </p>
+
+        {/* Flag visível */}
+        <div className="flag-container">
+          <p className="flag-text">{flag}</p>
+          <button className="copy-button" onClick={copyToClipboard}>
+            Copiar Flag
+          </button>
+        </div>
+
         <button className="dashboard-button" onClick={() => router.push('/')}>
           Desconectar
         </button>
@@ -104,6 +117,39 @@ export default function DashboardPage() {
         .matrix {
           color: #0aff0a;
           font-weight: bold;
+        }
+
+        .flag-container {
+          background: rgba(0, 255, 0, 0.1);
+          padding: 10px;
+          border-radius: 5px;
+          display: inline-block;
+          margin-bottom: 1rem;
+        }
+
+        .flag-text {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #00ff00;
+          text-shadow: 0 0 10px #00ff00;
+          margin-bottom: 0.5rem;
+        }
+
+        .copy-button {
+          padding: 0.5rem 1rem;
+          border: 2px solid #00ff00;
+          background: transparent;
+          color: #00ff00;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 1rem;
+        }
+
+        .copy-button:hover {
+          background: #00ff00;
+          color: #000;
+          text-shadow: none;
         }
 
         .dashboard-button {
